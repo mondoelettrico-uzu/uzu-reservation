@@ -18,6 +18,7 @@
       --uzu-yellow: #ffcc00;
       --uzu-dark: #222222;
       --uzu-green: #06c755;
+      --uzu-error: #b33a2b;
     }
 
     * {
@@ -113,17 +114,13 @@
     textarea {
       width: 100%;
 
-      border:
-        1px solid
-        #d8d4ca;
-
+      border: 1px solid #d8d4ca;
       border-radius: 9px;
 
       background: #ffffff;
       color: #222222;
 
       font-size: 16px;
-
       font-family: inherit;
 
       -webkit-appearance: none;
@@ -176,7 +173,7 @@
 
 
     /* =========================
-       NOTES
+       DATE INFO
     ========================== */
 
     .holiday-note {
@@ -184,6 +181,23 @@
       font-size: 12px;
       line-height: 1.7;
       color: #777777;
+    }
+
+    .date-error {
+      display: none;
+
+      margin-top: 9px;
+      padding: 10px 12px;
+
+      background: #fff0ee;
+
+      border-radius: 7px;
+
+      color: var(--uzu-error);
+
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.6;
     }
 
     .optional {
@@ -225,11 +239,9 @@
 
     .notice {
       margin-top: 18px;
-
       padding: 14px;
 
       background: #f7f7f4;
-
       border-radius: 8px;
 
       font-size: 12px;
@@ -240,7 +252,7 @@
 
 
     /* =========================
-       ERROR
+       GENERAL ERROR
     ========================== */
 
     .error {
@@ -252,7 +264,7 @@
       border-radius: 8px;
 
       background: #fff0ee;
-      color: #b33a2b;
+      color: var(--uzu-error);
 
       font-size: 13px;
       line-height: 1.7;
@@ -299,7 +311,6 @@
 
 <body>
 
-
 <div class="container">
 
 
@@ -315,7 +326,7 @@
   </div>
 
 
-  <!-- RESERVATION FORM -->
+  <!-- FORM -->
 
   <div id="formArea">
 
@@ -340,10 +351,16 @@
           type="date"
           id="date">
 
+        <div
+          id="dateError"
+          class="date-error">
+        </div>
+
       </div>
 
 
       <div class="holiday-note">
+        ※ご予約は当日〜2か月先まで承っております。<br>
         ※土日祝・年末年始はご予約いただけません。
       </div>
 
@@ -427,10 +444,13 @@
       <div class="field">
 
         <label for="remarks">
+
           備考
+
           <span class="optional">
             （任意）
           </span>
+
         </label>
 
         <textarea
@@ -452,7 +472,7 @@
       </button>
 
 
-      <!-- ERROR -->
+      <!-- GENERAL ERROR -->
 
       <div
         id="error"
@@ -541,17 +561,32 @@
 
 
   /* =========================
-     DATE RANGE
-     当日〜2か月先
+     DATE SETTINGS
   ========================== */
 
   const dateInput =
     document.getElementById('date');
 
 
+  /*
+    時刻部分の影響を受けないよう
+    今日の0:00に統一
+  */
+
   const today =
     new Date();
 
+  today.setHours(
+    0,
+    0,
+    0,
+    0
+  );
+
+
+  /*
+    YYYY-MM-DD形式
+  */
 
   function formatDateForInput(date) {
 
@@ -568,29 +603,98 @@
         date.getDate()
       ).padStart(2, '0');
 
-    return `${year}-${month}-${day}`;
+    return (
+      year +
+      '-' +
+      month +
+      '-' +
+      day
+    );
 
   }
 
 
-  /* 当日から予約可能 */
+  /*
+    当日から
+  */
+
+  const minReservationDate =
+    new Date(today);
+
+
+  /*
+    2か月先まで
+  */
+
+  const maxReservationDate =
+    new Date(
+
+      today.getFullYear(),
+
+      today.getMonth() + 2,
+
+      today.getDate()
+
+    );
+
+
+  /*
+    HTMLの日付欄にも
+    min / max を設定
+  */
 
   dateInput.min =
-    formatDateForInput(today);
-
-
-  /* 2か月先まで */
-
-  const maxDate =
-    new Date(
-      today.getFullYear(),
-      today.getMonth() + 2,
-      today.getDate()
+    formatDateForInput(
+      minReservationDate
     );
 
 
   dateInput.max =
-    formatDateForInput(maxDate);
+    formatDateForInput(
+      maxReservationDate
+    );
+
+
+  /* =========================
+     STRING → DATE
+  ========================== */
+
+  function parseInputDate(
+    value
+  ) {
+
+    if (!value) {
+      return null;
+    }
+
+
+    const parts =
+      value.split('-');
+
+
+    const date =
+      new Date(
+
+        Number(parts[0]),
+
+        Number(parts[1]) - 1,
+
+        Number(parts[2])
+
+      );
+
+
+    date.setHours(
+      0,
+      0,
+      0,
+      0
+    );
+
+
+    return date;
+
+  }
 
 
   /* =========================
@@ -625,7 +729,7 @@
 
 
   /* =========================
-     VERNAL EQUINOX
+     EQUINOX
   ========================== */
 
   function vernalEquinox(year) {
@@ -645,10 +749,6 @@
 
   }
 
-
-  /* =========================
-     AUTUMN EQUINOX
-  ========================== */
 
   function autumnEquinox(year) {
 
@@ -847,6 +947,10 @@
   function isJapaneseHoliday(date) {
 
 
+    /*
+      通常の祝日
+    */
+
     if (
       isBaseHoliday(date)
     ) {
@@ -858,6 +962,10 @@
 
     /*
       振替休日
+
+      前日以前を遡り、
+      日曜日の祝日から
+      連続している場合を確認
     */
 
     const check =
@@ -870,14 +978,14 @@
 
 
     while (
-      check.getDay() !== 0
+      isBaseHoliday(check)
     ) {
 
       if (
-        !isBaseHoliday(check)
+        check.getDay() === 0
       ) {
 
-        break;
+        return true;
 
       }
 
@@ -889,21 +997,10 @@
     }
 
 
-    if (
-
-      check.getDay() === 0 &&
-
-      isBaseHoliday(check)
-
-    ) {
-
-      return true;
-
-    }
-
-
     /*
       国民の休日
+
+      前後が祝日の場合
     */
 
     const before =
@@ -925,7 +1022,6 @@
     if (
 
       isBaseHoliday(before) &&
-
       isBaseHoliday(after)
 
     ) {
@@ -1005,16 +1101,8 @@
       }
 
 
-      const selected =
-        new Date(
-          year,
-          11,
-          day
-        );
-
-
       if (
-        selected >= lastSaturday
+        date >= lastSaturday
       ) {
 
         return true;
@@ -1030,16 +1118,83 @@
 
 
   /* =========================
-     CLOSED DAY
+     DATE VALIDATION
   ========================== */
 
-  function isClosedDay(date) {
+  function validateReservationDate(
+    date
+  ) {
+
+
+    if (!date) {
+
+      return {
+        valid: false,
+        message:
+          'ご希望日を選択してください。'
+      };
+
+    }
+
+
+    /*
+      過去
+    */
+
+    if (
+      date < minReservationDate
+    ) {
+
+      return {
+        valid: false,
+        message:
+          '過去の日付はご予約いただけません。'
+      };
+
+    }
+
+
+    /*
+      2か月より先
+    */
+
+    if (
+      date > maxReservationDate
+    ) {
+
+      return {
+        valid: false,
+        message:
+          'ご予約は2か月先まで承っております。'
+      };
+
+    }
+
+
+    /*
+      年末年始
+    */
+
+    if (
+      isYearEndNewYearHoliday(date)
+    ) {
+
+      return {
+        valid: false,
+        message:
+          '年末年始休業のため、ご予約いただけません。'
+      };
+
+    }
+
+
+    /*
+      土日
+    */
 
     const weekday =
       date.getDay();
 
-
-    /* 土日 */
 
     if (
 
@@ -1048,34 +1203,78 @@
 
     ) {
 
-      return true;
+      return {
+        valid: false,
+        message:
+          '土日は定休日のため、ご予約いただけません。'
+      };
 
     }
 
 
-    /* 祝日 */
+    /*
+      祝日
+    */
 
     if (
       isJapaneseHoliday(date)
     ) {
 
-      return true;
+      return {
+        valid: false,
+        message:
+          '祝日は定休日のため、ご予約いただけません。'
+      };
 
     }
 
 
-    /* 年末年始 */
+    return {
+      valid: true,
+      message: ''
+    };
 
-    if (
-      isYearEndNewYearHoliday(date)
-    ) {
-
-      return true;
-
-    }
+  }
 
 
-    return false;
+  /* =========================
+     DATE ERROR
+  ========================== */
+
+  function showDateError(
+    message
+  ) {
+
+    const area =
+      document.getElementById(
+        'dateError'
+      );
+
+
+    area.textContent =
+      message;
+
+
+    area.style.display =
+      'block';
+
+  }
+
+
+  function hideDateError() {
+
+    const area =
+      document.getElementById(
+        'dateError'
+      );
+
+
+    area.textContent =
+      '';
+
+
+    area.style.display =
+      'none';
 
   }
 
@@ -1088,6 +1287,8 @@
     'change',
     function () {
 
+
+      hideDateError();
       hideError();
 
 
@@ -1100,84 +1301,36 @@
       }
 
 
-      const parts =
-        this.value.split('-');
-
-
       const selectedDate =
-        new Date(
-
-          Number(parts[0]),
-
-          Number(parts[1]) - 1,
-
-          Number(parts[2])
-
+        parseInputDate(
+          this.value
         );
 
 
-      /*
-        年末年始
-      */
-
-      if (
-        isYearEndNewYearHoliday(
+      const result =
+        validateReservationDate(
           selectedDate
-        )
-      ) {
-
-        this.value = '';
-
-        showError(
-          '年末年始休業のため、ご予約いただけません。'
         );
-
-        return;
-
-      }
-
-
-      /*
-        土日
-      */
-
-      const weekday =
-        selectedDate.getDay();
 
 
       if (
-
-        weekday === 0 ||
-        weekday === 6
-
+        !result.valid
       ) {
 
-        this.value = '';
+        /*
+          エラー理由を先に表示
+        */
 
-        showError(
-          '土曜日・日曜日は定休日のため、ご予約いただけません。'
+        showDateError(
+          result.message
         );
 
-        return;
 
-      }
-
-
-      /*
-        祝日
-      */
-
-      if (
-        isJapaneseHoliday(
-          selectedDate
-        )
-      ) {
+        /*
+          無効な日付は解除
+        */
 
         this.value = '';
-
-        showError(
-          '祝日は定休日のため、ご予約いただけません。'
-        );
 
         return;
 
@@ -1198,7 +1351,7 @@
     hideError();
 
 
-    const date =
+    const dateValue =
       document.getElementById(
         'date'
       ).value;
@@ -1229,21 +1382,15 @@
 
 
     /*
-      必須項目確認
-      備考は任意
+      日付確認
     */
 
     if (
-
-      !date ||
-      !time ||
-      !people ||
-      !name
-
+      !dateValue
     ) {
 
-      showError(
-        'ご希望日・時間・人数・お名前をご入力ください。'
+      showDateError(
+        'ご希望日を選択してください。'
       );
 
       return;
@@ -1252,37 +1399,76 @@
 
 
     /*
-      日付
+      日付をJavaScriptでも
+      必ず再チェック
     */
-
-    const dateParts =
-      date.split('-');
-
 
     const selectedDate =
-      new Date(
-
-        Number(dateParts[0]),
-
-        Number(dateParts[1]) - 1,
-
-        Number(dateParts[2])
-
+      parseInputDate(
+        dateValue
       );
 
 
+    const dateResult =
+      validateReservationDate(
+        selectedDate
+      );
+
+
+    if (
+      !dateResult.valid
+    ) {
+
+      showDateError(
+        dateResult.message
+      );
+
+      dateInput.value = '';
+
+      return;
+
+    }
+
+
+    hideDateError();
+
+
     /*
-      休業日再確認
+      その他必須項目
     */
 
     if (
-      isClosedDay(
-        selectedDate
-      )
+      !time
     ) {
 
       showError(
-        '選択された日は定休日です。別の日をお選びください。'
+        'ご希望時間を選択してください。'
+      );
+
+      return;
+
+    }
+
+
+    if (
+      !people
+    ) {
+
+      showError(
+        '人数を選択してください。'
+      );
+
+      return;
+
+    }
+
+
+    if (
+      !name
+    ) {
+
+      showError(
+        'お名前をご入力ください。'
       );
 
       return;
@@ -1291,7 +1477,7 @@
 
 
     /*
-      LINE内確認
+      LINEアプリ内か確認
     */
 
     if (
@@ -1310,6 +1496,10 @@
     /*
       表示用日付
     */
+
+    const dateParts =
+      dateValue.split('-');
+
 
     const formattedDate =
 
@@ -1414,10 +1604,12 @@
 
 
   /* =========================
-     ERROR
+     GENERAL ERROR
   ========================== */
 
-  function showError(message) {
+  function showError(
+    message
+  ) {
 
     const area =
       document.getElementById(
@@ -1443,12 +1635,12 @@
       );
 
 
-    area.style.display =
-      'none';
-
-
     area.textContent =
       '';
+
+
+    area.style.display =
+      'none';
 
   }
 
@@ -1464,7 +1656,6 @@
 
 
 </script>
-
 
 </body>
 
