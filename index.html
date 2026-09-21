@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>UZU ご予約</title>
+
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 28px 18px 50px;
+      font-family: -apple-system, BlinkMacSystemFont,
+        "Helvetica Neue", "Noto Sans JP", sans-serif;
+      background: #f7f4ed;
+      color: #2f2a24;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .title {
+      text-align: center;
+      margin: 10px 0 6px;
+      font-size: 27px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      color: #777;
+      margin-bottom: 30px;
+    }
+
+    .lead {
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    .field {
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    input,
+    select {
+      width: 100%;
+      height: 54px;
+      padding: 0 14px;
+      border: 1px solid #d7d1c6;
+      border-radius: 8px;
+      background: #fff;
+      color: #2f2a24;
+      font-size: 16px;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: #999;
+    }
+
+    .send-button {
+      width: 100%;
+      height: 60px;
+      margin-top: 8px;
+      border: 0;
+      border-radius: 8px;
+      background: #06c755;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .send-button:disabled {
+      opacity: 0.5;
+    }
+
+    .notice {
+      margin-top: 18px;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #777;
+    }
+
+    .error {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 6px;
+      background: #fff0ee;
+      color: #b33a2b;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .success {
+      display: none;
+      text-align: center;
+      padding: 35px 15px;
+    }
+
+    .success-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .success-text {
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .debug {
+      margin-top: 30px;
+      padding: 14px;
+      background: #eee;
+      border-radius: 8px;
+      font-size: 12px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+  <div id="formArea">
+
+    <div class="title">
+      UZU
+    </div>
+
+    <div class="subtitle">
+      FARM & TABLE
+    </div>
+
+    <div class="lead">
+      ご予約希望の内容をご入力ください。<br>
+      店舗からの返信をもって予約確定となります。
+    </div>
+
+
+    <div class="field">
+      <label for="date">
+        ご希望日
+      </label>
+
+      <input
+        type="date"
+        id="date">
+    </div>
+
+
+    <div class="field">
+      <label for="time">
+        ご希望時間
+      </label>
+
+      <select id="time">
+
+        <option value="">
+          選択してください
+        </option>
+
+        <option value="11:00">11:00</option>
+        <option value="11:30">11:30</option>
+        <option value="12:00">12:00</option>
+        <option value="12:30">12:30</option>
+        <option value="13:00">13:00</option>
+        <option value="13:30">13:30</option>
+        <option value="14:00">14:00</option>
+
+      </select>
+    </div>
+
+
+    <div class="field">
+      <label for="people">
+        人数
+      </label>
+
+      <select id="people">
+
+        <option value="">
+          選択してください
+        </option>
+
+        <option value="1">1名</option>
+        <option value="2">2名</option>
+        <option value="3">3名</option>
+        <option value="4">4名</option>
+        <option value="5">5名</option>
+        <option value="6">6名</option>
+        <option value="7">7名</option>
+        <option value="8">8名</option>
+        <option value="9">9名</option>
+        <option value="10">10名</option>
+
+      </select>
+    </div>
+
+
+    <div class="field">
+      <label for="name">
+        お名前
+      </label>
+
+      <input
+        type="text"
+        id="name"
+        placeholder="例：山田 太郎">
+    </div>
+
+
+    <button
+      id="sendButton"
+      class="send-button"
+      onclick="sendReservation()">
+
+      LINEで予約希望を送信
+
+    </button>
+
+
+    <div
+      id="error"
+      class="error">
+    </div>
+
+
+    <div class="notice">
+      ※この時点では予約は確定しておりません。<br>
+      店舗からの返信をもって予約確定となります。
+    </div>
+
+  </div>
+
+
+  <div
+    id="successArea"
+    class="success">
+
+    <div class="success-title">
+      送信しました
+    </div>
+
+    <div class="success-text">
+      ご予約希望ありがとうございます。<br><br>
+      店舗で内容を確認後、<br>
+      LINEよりご返信いたします。
+    </div>
+
+  </div>
+
+
+  <div
+    id="debug"
+    class="debug">
+
+LIFF接続確認中...
+
+  </div>
+
+</div>
+
+
+<script>
+
+  const LIFF_ID =
+    '2011685472-ftHOwEec';
+
+
+  async function initializeLiff() {
+
+    const debug =
+      document.getElementById('debug');
+
+    try {
+
+      debug.textContent =
+        'LIFF初期化中...';
+
+
+      await liff.init({
+        liffId: LIFF_ID
+      });
+
+
+      const context =
+        liff.getContext();
+
+
+      let permissionState =
+        '未確認';
+
+
+      try {
+
+        const permission =
+          await liff.permission.query(
+            'chat_message.write'
+          );
+
+        permissionState =
+          permission.state;
+
+      } catch (error) {
+
+        permissionState =
+          '確認エラー';
+
+      }
+
+
+      debug.textContent =
+`【LIFF接続 OK】
+
+LINEアプリ内：
+${liff.isInClient()}
+
+ログイン：
+${liff.isLoggedIn()}
+
+context.type：
+${context?.type || 'なし'}
+
+viewType：
+${context?.viewType || 'なし'}
+
+chat_message.write：
+${permissionState}`;
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      debug.textContent =
+`【LIFF初期化エラー】
+
+code：
+${error.code || 'なし'}
+
+message：
+${error.message || error}`;
+
+    }
+
+  }
+
+
+  async function sendReservation() {
+
+    const date =
+      document.getElementById('date').value;
+
+    const time =
+      document.getElementById('time').value;
+
+    const people =
+      document.getElementById('people').value;
+
+    const name =
+      document.getElementById('name').value.trim();
+
+
+    if (!date || !time || !people || !name) {
+
+      showError(
+        'すべての項目をご入力ください。'
+      );
+
+      return;
+
+    }
+
+
+    if (!liff.isInClient()) {
+
+      showError(
+        'LINEアプリから予約フォームを開いてください。'
+      );
+
+      return;
+
+    }
+
+
+    const parts =
+      date.split('-');
+
+
+    const formattedDate =
+      Number(parts[0]) + '年' +
+      Number(parts[1]) + '月' +
+      Number(parts[2]) + '日';
+
+
+    const message =
+`【UZU ご予約希望】
+
+希望日：${formattedDate}
+希望時間：${time}
+人数：${people}名
+お名前：${name}
+
+※店舗からの返信をもって予約確定となります。`;
+
+
+    const button =
+      document.getElementById(
+        'sendButton'
+      );
+
+
+    button.disabled = true;
+
+    button.textContent =
+      '送信しています…';
+
+
+    try {
+
+      await liff.sendMessages([
+        {
+          type: 'text',
+          text: message
+        }
+      ]);
+
+
+      document
+        .getElementById('formArea')
+        .style.display =
+        'none';
+
+
+      document
+        .getElementById('successArea')
+        .style.display =
+        'block';
+
+
+    } catch (error) {
+
+      console.error(error);
+
+
+      button.disabled = false;
+
+      button.textContent =
+        'LINEで予約希望を送信';
+
+
+      showError(
+        '送信できませんでした：' +
+        (error.message || error)
+      );
+
+    }
+
+  }
+
+
+  function showError(message) {
+
+    const area =
+      document.getElementById('error');
+
+    area.textContent =
+      message;
+
+    area.style.display =
+      'block';
+
+  }
+
+
+  /*
+   * 今日以前を選択させない
+   */
+
+  const today =
+    new Date();
+
+  const yyyy =
+    today.getFullYear();
+
+  const mm =
+    String(
+      today.getMonth() + 1
+    ).padStart(2, '0');
+
+  const dd =
+    String(
+      today.getDate()
+    ).padStart(2, '0');
+
+
+  document
+    .getElementById('date')
+    .min =
+    `${yyyy}-${mm}-${dd}`;
+
+
+  /*
+   * LIFF起動
+   */
+
+  window.addEventListener(
+    'load',
+    initializeLiff
+  );
+
+</script>
+
+</body>
+
+</html>
