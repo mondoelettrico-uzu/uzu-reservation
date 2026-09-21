@@ -17,7 +17,6 @@
     :root {
       --uzu-yellow: #ffcc00;
       --uzu-dark: #222222;
-      --uzu-white: #ffffff;
       --uzu-green: #06c755;
     }
 
@@ -62,7 +61,7 @@
       display: block;
       width: 100px;
       height: auto;
-      margin: 6px auto 2px;
+      margin: 6px auto 4px;
     }
 
 
@@ -75,14 +74,7 @@
       font-size: 25px;
       font-weight: 700;
       letter-spacing: 0.12em;
-      margin: 0 0 6px;
-    }
-
-    .lead {
-      text-align: center;
-      font-size: 14px;
-      line-height: 1.8;
-      margin: 0 0 18px;
+      margin: 0 0 16px;
     }
 
 
@@ -91,7 +83,7 @@
     ========================== */
 
     .form-card {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.96);
       border-radius: 18px;
       padding: 25px 20px 27px;
 
@@ -117,10 +109,9 @@
     }
 
     input,
-    select {
+    select,
+    textarea {
       width: 100%;
-      height: 54px;
-      padding: 0 14px;
 
       border:
         1px solid
@@ -133,12 +124,28 @@
 
       font-size: 16px;
 
+      font-family: inherit;
+
       -webkit-appearance: none;
       appearance: none;
     }
 
+    input,
+    select {
+      height: 54px;
+      padding: 0 14px;
+    }
+
+    textarea {
+      height: 100px;
+      padding: 14px;
+      line-height: 1.6;
+      resize: vertical;
+    }
+
     input:focus,
-    select:focus {
+    select:focus,
+    textarea:focus {
       outline: none;
       border-color: #777777;
     }
@@ -164,22 +171,24 @@
         6px 6px,
         6px 6px;
 
-      background-repeat:
-        no-repeat;
+      background-repeat: no-repeat;
     }
 
 
     /* =========================
-       HOLIDAY INFO
+       NOTES
     ========================== */
 
     .holiday-note {
       margin: -9px 0 21px;
-
       font-size: 12px;
       line-height: 1.7;
-
       color: #777777;
+    }
+
+    .optional {
+      font-weight: normal;
+      color: #888888;
     }
 
 
@@ -217,10 +226,16 @@
     .notice {
       margin-top: 18px;
 
+      padding: 14px;
+
+      background: #f7f7f4;
+
+      border-radius: 8px;
+
       font-size: 12px;
       line-height: 1.8;
 
-      color: #666666;
+      color: #555555;
     }
 
 
@@ -252,7 +267,7 @@
       display: none;
 
       background:
-        rgba(255, 255, 255, 0.95);
+        rgba(255, 255, 255, 0.96);
 
       border-radius: 18px;
 
@@ -288,9 +303,7 @@
 <div class="container">
 
 
-  <!-- =========================
-       UZU LOGO
-  ========================== -->
+  <!-- LOGO -->
 
   <div class="logo-area">
 
@@ -302,20 +315,13 @@
   </div>
 
 
-  <!-- =========================
-       RESERVATION FORM
-  ========================== -->
+  <!-- RESERVATION FORM -->
 
   <div id="formArea">
 
 
     <div class="reservation-title">
       ご予約
-    </div>
-
-
-    <div class="lead">
-      店舗からの返信をもって予約確定となります。
     </div>
 
 
@@ -356,33 +362,13 @@
             選択してください
           </option>
 
-          <option value="11:00">
-            11:00
-          </option>
-
-          <option value="11:30">
-            11:30
-          </option>
-
-          <option value="12:00">
-            12:00
-          </option>
-
-          <option value="12:30">
-            12:30
-          </option>
-
-          <option value="13:00">
-            13:00
-          </option>
-
-          <option value="13:30">
-            13:30
-          </option>
-
-          <option value="14:00">
-            14:00
-          </option>
+          <option value="11:00">11:00</option>
+          <option value="11:30">11:30</option>
+          <option value="12:00">12:00</option>
+          <option value="12:30">12:30</option>
+          <option value="13:00">13:00</option>
+          <option value="13:30">13:30</option>
+          <option value="14:00">14:00</option>
 
         </select>
 
@@ -436,6 +422,24 @@
       </div>
 
 
+      <!-- REMARKS -->
+
+      <div class="field">
+
+        <label for="remarks">
+          備考
+          <span class="optional">
+            （任意）
+          </span>
+        </label>
+
+        <textarea
+          id="remarks"
+          placeholder="アレルギー・お子様連れ・その他ご要望など"></textarea>
+
+      </div>
+
+
       <!-- SEND -->
 
       <button
@@ -448,16 +452,21 @@
       </button>
 
 
+      <!-- ERROR -->
+
       <div
         id="error"
         class="error">
       </div>
 
 
+      <!-- NOTICE -->
+
       <div class="notice">
 
-        ※この時点では予約は確定しておりません。<br>
-        店舗からの返信をもって予約確定となります。
+        ※ご予約は、店舗からの返信をもって確定となります。<br><br>
+
+        当日のご予約も承っておりますが、営業中はすぐに返信できない場合がございます。あらかじめご了承ください。
 
       </div>
 
@@ -467,9 +476,7 @@
   </div>
 
 
-  <!-- =========================
-       SUCCESS
-  ========================== -->
+  <!-- SUCCESS -->
 
   <div
     id="successArea"
@@ -489,7 +496,9 @@
       LINEよりご返信いたします。<br><br>
 
       店舗からの返信をもって<br>
-      ご予約確定となります。
+      ご予約確定となります。<br><br>
+
+      営業中は返信までお時間をいただく場合がございます。
 
     </div>
 
@@ -532,7 +541,8 @@
 
 
   /* =========================
-     DATE MIN
+     DATE RANGE
+     当日〜2か月先
   ========================== */
 
   const dateInput =
@@ -543,24 +553,44 @@
     new Date();
 
 
-  const yyyy =
-    today.getFullYear();
+  function formatDateForInput(date) {
+
+    const year =
+      date.getFullYear();
+
+    const month =
+      String(
+        date.getMonth() + 1
+      ).padStart(2, '0');
+
+    const day =
+      String(
+        date.getDate()
+      ).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+
+  }
 
 
-  const mm =
-    String(
-      today.getMonth() + 1
-    ).padStart(2, '0');
-
-
-  const dd =
-    String(
-      today.getDate()
-    ).padStart(2, '0');
-
+  /* 当日から予約可能 */
 
   dateInput.min =
-    `${yyyy}-${mm}-${dd}`;
+    formatDateForInput(today);
+
+
+  /* 2か月先まで */
+
+  const maxDate =
+    new Date(
+      today.getFullYear(),
+      today.getMonth() + 2,
+      today.getDate()
+    );
+
+
+  dateInput.max =
+    formatDateForInput(maxDate);
 
 
   /* =========================
@@ -1009,9 +1039,7 @@
       date.getDay();
 
 
-    /*
-      土日
-    */
+    /* 土日 */
 
     if (
 
@@ -1025,9 +1053,7 @@
     }
 
 
-    /*
-      祝日
-    */
+    /* 祝日 */
 
     if (
       isJapaneseHoliday(date)
@@ -1038,9 +1064,7 @@
     }
 
 
-    /*
-      年末年始
-    */
+    /* 年末年始 */
 
     if (
       isYearEndNewYearHoliday(date)
@@ -1198,8 +1222,15 @@
       ).value.trim();
 
 
+    const remarks =
+      document.getElementById(
+        'remarks'
+      ).value.trim();
+
+
     /*
-      入力確認
+      必須項目確認
+      備考は任意
     */
 
     if (
@@ -1212,7 +1243,7 @@
     ) {
 
       showError(
-        'すべての項目をご入力ください。'
+        'ご希望日・時間・人数・お名前をご入力ください。'
       );
 
       return;
@@ -1277,7 +1308,7 @@
 
 
     /*
-      表示日
+      表示用日付
     */
 
     const formattedDate =
@@ -1293,7 +1324,7 @@
 
 
     /*
-      送信メッセージ
+      LINE送信メッセージ
     */
 
     const message =
@@ -1304,6 +1335,7 @@
 希望時間：${time}
 人数：${people}名
 お名前：${name}
+備考：${remarks || 'なし'}
 
 ※店舗からの返信をもって予約確定となります。`;
 
