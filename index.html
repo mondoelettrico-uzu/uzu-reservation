@@ -424,19 +424,33 @@
 
       <!-- NAME -->
 
-      <div class="field">
+<div class="field">
 
-        <label for="name">
-          お名前
-        </label>
+  <label>
+    お名前
+  </label>
 
-        <input
-          type="text"
-          id="name"
-          placeholder="例：山田 太郎"
-          autocomplete="name">
+  <div style="
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  ">
 
-      </div>
+    <input
+      type="text"
+      id="lastName"
+      placeholder="姓　例：山田"
+      autocomplete="family-name">
+
+    <input
+      type="text"
+      id="firstName"
+      placeholder="名　例：太郎"
+      autocomplete="given-name">
+
+  </div>
+
+</div>
 
 
       <!-- REMARKS -->
@@ -1435,10 +1449,20 @@
       ).value;
 
 
-    const name =
-      document.getElementById(
-        'name'
-      ).value.trim();
+    const lastName =
+  document.getElementById(
+    'lastName'
+  ).value.trim();
+
+
+const firstName =
+  document.getElementById(
+    'firstName'
+  ).value.trim();
+
+
+const name =
+  lastName + ' ' + firstName;
 
 
     const remarks =
@@ -1530,16 +1554,17 @@
 
 
     if (
-      !name
-    ) {
+  !lastName ||
+  !firstName
+) {
 
-      showError(
-        'お名前をご入力ください。'
-      );
+  showError(
+    '姓・名の両方をご入力ください。'
+  );
 
-      return;
+  return;
 
-    }
+}
 
 
     /*
