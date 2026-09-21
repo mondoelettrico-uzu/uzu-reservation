@@ -12,36 +12,22 @@
 
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
-
   <style>
 
     :root {
-
-      /* UZUカラー */
       --uzu-yellow: #ffcc00;
-
       --uzu-dark: #222222;
-
       --uzu-white: #ffffff;
-
       --uzu-green: #06c755;
-
     }
-
 
     * {
       box-sizing: border-box;
     }
 
-
     body {
-
       margin: 0;
-
-      padding:
-        10px
-        18px
-        60px;
+      padding: 8px 18px 60px;
 
       font-family:
         -apple-system,
@@ -52,24 +38,14 @@
         "Noto Sans JP",
         sans-serif;
 
-      background:
-        var(--uzu-yellow);
-
-      color:
-        var(--uzu-dark);
-
+      background: var(--uzu-yellow);
+      color: var(--uzu-dark);
     }
 
-
     .container {
-
       width: 100%;
-
       max-width: 520px;
-
-      margin:
-        0 auto;
-
+      margin: 0 auto;
     }
 
 
@@ -78,29 +54,16 @@
     ========================== */
 
     .logo-area {
-
       text-align: center;
-
-      margin:
-        0 auto
-        0;
-
+      margin: 0 auto;
     }
 
-
     .main-logo {
-
       display: block;
-
-      width: 100%;
-
-      max-width: 390px;
-
+      width: 160px;
+      max-width: 55%;
       height: auto;
-
-      margin:
-        0 auto;
-
+      margin: 6px auto 2px;
     }
 
 
@@ -109,36 +72,18 @@
     ========================== */
 
     .reservation-title {
-
       text-align: center;
-
       font-size: 25px;
-
       font-weight: 700;
-
       letter-spacing: 0.12em;
-
-      margin:
-        0
-        0
-        12px;
-
+      margin: 0 0 6px;
     }
 
-
     .lead {
-
       text-align: center;
-
       font-size: 14px;
-
       line-height: 1.8;
-
-      margin:
-        0
-        0
-        26px;
-
+      margin: 0 0 18px;
     }
 
 
@@ -147,34 +92,13 @@
     ========================== */
 
     .form-card {
-
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          0.95
-        );
-
-      border-radius:
-        18px;
-
-      padding:
-        25px
-        20px
-        27px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 18px;
+      padding: 25px 20px 27px;
 
       box-shadow:
-        0
-        5px
-        20px
-        rgba(
-          0,
-          0,
-          0,
-          0.08
-        );
-
+        0 5px 20px
+        rgba(0, 0, 0, 0.08);
     }
 
 
@@ -183,87 +107,50 @@
     ========================== */
 
     .field {
-
-      margin-bottom:
-        22px;
-
+      margin-bottom: 22px;
     }
-
 
     label {
-
       display: block;
-
-      margin-bottom:
-        8px;
-
-      font-size:
-        14px;
-
-      font-weight:
-        700;
-
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 700;
     }
-
 
     input,
     select {
-
       width: 100%;
-
       height: 54px;
-
-      padding:
-        0
-        14px;
+      padding: 0 14px;
 
       border:
         1px solid
         #d8d4ca;
 
-      border-radius:
-        9px;
+      border-radius: 9px;
 
-      background:
-        #ffffff;
+      background: #ffffff;
+      color: #222222;
 
-      color:
-        #222222;
+      font-size: 16px;
 
-      font-size:
-        16px;
-
-      -webkit-appearance:
-        none;
-
-      appearance:
-        none;
-
+      -webkit-appearance: none;
+      appearance: none;
     }
-
 
     input:focus,
     select:focus {
-
-      outline:
-        none;
-
-      border-color:
-        #777777;
-
+      outline: none;
+      border-color: #777777;
     }
 
-
     select {
-
       background-image:
-
         linear-gradient(
           45deg,
           transparent 50%,
           #555 50%
         ),
-
         linear-gradient(
           135deg,
           #555 50%,
@@ -271,24 +158,15 @@
         );
 
       background-position:
-
-        calc(100% - 20px)
-        23px,
-
-        calc(100% - 14px)
-        23px;
+        calc(100% - 20px) 23px,
+        calc(100% - 14px) 23px;
 
       background-size:
-
-        6px
-        6px,
-
-        6px
-        6px;
+        6px 6px,
+        6px 6px;
 
       background-repeat:
         no-repeat;
-
     }
 
 
@@ -297,21 +175,12 @@
     ========================== */
 
     .holiday-note {
+      margin: -9px 0 21px;
 
-      margin:
-        -9px
-        0
-        21px;
+      font-size: 12px;
+      line-height: 1.7;
 
-      font-size:
-        12px;
-
-      line-height:
-        1.75;
-
-      color:
-        #777777;
-
+      color: #777777;
     }
 
 
@@ -320,48 +189,25 @@
     ========================== */
 
     .send-button {
+      width: 100%;
+      height: 60px;
+      margin-top: 4px;
 
-      width:
-        100%;
+      border: none;
+      border-radius: 10px;
 
-      height:
-        60px;
+      background: var(--uzu-green);
+      color: #ffffff;
 
-      margin-top:
-        4px;
+      font-size: 17px;
+      font-weight: 700;
 
-      border:
-        none;
-
-      border-radius:
-        10px;
-
-      background:
-        var(--uzu-green);
-
-      color:
-        #ffffff;
-
-      font-size:
-        17px;
-
-      font-weight:
-        700;
-
-      cursor:
-        pointer;
-
+      cursor: pointer;
     }
 
-
     .send-button:disabled {
-
-      opacity:
-        0.55;
-
-      cursor:
-        default;
-
+      opacity: 0.55;
+      cursor: default;
     }
 
 
@@ -370,19 +216,12 @@
     ========================== */
 
     .notice {
+      margin-top: 18px;
 
-      margin-top:
-        18px;
+      font-size: 12px;
+      line-height: 1.8;
 
-      font-size:
-        12px;
-
-      line-height:
-        1.8;
-
-      color:
-        #666666;
-
+      color: #666666;
     }
 
 
@@ -391,32 +230,18 @@
     ========================== */
 
     .error {
+      display: none;
 
-      display:
-        none;
+      margin-top: 16px;
+      padding: 13px 14px;
 
-      margin-top:
-        16px;
+      border-radius: 8px;
 
-      padding:
-        13px
-        14px;
+      background: #fff0ee;
+      color: #b33a2b;
 
-      border-radius:
-        8px;
-
-      background:
-        #fff0ee;
-
-      color:
-        #b33a2b;
-
-      font-size:
-        13px;
-
-      line-height:
-        1.7;
-
+      font-size: 13px;
+      line-height: 1.7;
     }
 
 
@@ -425,74 +250,37 @@
     ========================== */
 
     .success {
-
-      display:
-        none;
+      display: none;
 
       background:
-        rgba(
-          255,
-          255,
-          255,
-          0.95
-        );
+        rgba(255, 255, 255, 0.95);
 
-      border-radius:
-        18px;
+      border-radius: 18px;
 
-      margin-top:
-        20px;
+      margin-top: 20px;
+      padding: 40px 22px;
 
-      padding:
-        40px
-        22px;
-
-      text-align:
-        center;
+      text-align: center;
 
       box-shadow:
-        0
-        5px
-        20px
-        rgba(
-          0,
-          0,
-          0,
-          0.08
-        );
-
+        0 5px 20px
+        rgba(0, 0, 0, 0.08);
     }
-
 
     .success-title {
-
-      font-size:
-        22px;
-
-      font-weight:
-        700;
-
-      margin-bottom:
-        18px;
-
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 18px;
     }
-
 
     .success-text {
-
-      font-size:
-        14px;
-
-      line-height:
-        1.9;
-
+      font-size: 14px;
+      line-height: 1.9;
     }
-
 
   </style>
 
 </head>
-
 
 
 <body>
@@ -515,7 +303,6 @@
   </div>
 
 
-
   <!-- =========================
        RESERVATION FORM
   ========================== -->
@@ -524,38 +311,26 @@
 
 
     <div class="reservation-title">
-
       ご予約
-
     </div>
 
 
     <div class="lead">
-
       ご希望の日時をご入力ください。<br>
-
-      店舗からの返信をもって
-      予約確定となります。
-
+      店舗からの返信をもって予約確定となります。
     </div>
-
 
 
     <div class="form-card">
 
 
-      <!-- =====================
-           DATE
-      ====================== -->
+      <!-- DATE -->
 
       <div class="field">
 
         <label for="date">
-
           ご希望日
-
         </label>
-
 
         <input
           type="date"
@@ -564,188 +339,95 @@
       </div>
 
 
-
       <div class="holiday-note">
-
-        ※土曜・日曜・祝日は定休日です。<br>
-
-        ※年末年始は、
-        12月の最終土曜日〜1月6日まで
-        お休みとなります。
-
+        ※土日祝・年末年始はご予約いただけません。
       </div>
 
 
-
-      <!-- =====================
-           TIME
-      ====================== -->
+      <!-- TIME -->
 
       <div class="field">
 
         <label for="time">
-
           ご希望時間
-
         </label>
-
 
         <select id="time">
 
-
           <option value="">
-
             選択してください
-
           </option>
-
 
           <option value="11:00">
-
             11:00
-
           </option>
-
 
           <option value="11:30">
-
             11:30
-
           </option>
-
 
           <option value="12:00">
-
             12:00
-
           </option>
-
 
           <option value="12:30">
-
             12:30
-
           </option>
-
 
           <option value="13:00">
-
             13:00
-
           </option>
-
 
           <option value="13:30">
-
             13:30
-
           </option>
-
 
           <option value="14:00">
-
             14:00
-
           </option>
-
 
         </select>
 
       </div>
 
 
-
-      <!-- =====================
-           PEOPLE
-      ====================== -->
+      <!-- PEOPLE -->
 
       <div class="field">
 
         <label for="people">
-
           人数
-
         </label>
-
 
         <select id="people">
 
-
           <option value="">
-
             選択してください
-
           </option>
 
-
-          <option value="1">
-            1名
-          </option>
-
-
-          <option value="2">
-            2名
-          </option>
-
-
-          <option value="3">
-            3名
-          </option>
-
-
-          <option value="4">
-            4名
-          </option>
-
-
-          <option value="5">
-            5名
-          </option>
-
-
-          <option value="6">
-            6名
-          </option>
-
-
-          <option value="7">
-            7名
-          </option>
-
-
-          <option value="8">
-            8名
-          </option>
-
-
-          <option value="9">
-            9名
-          </option>
-
-
-          <option value="10">
-            10名
-          </option>
-
+          <option value="1">1名</option>
+          <option value="2">2名</option>
+          <option value="3">3名</option>
+          <option value="4">4名</option>
+          <option value="5">5名</option>
+          <option value="6">6名</option>
+          <option value="7">7名</option>
+          <option value="8">8名</option>
+          <option value="9">9名</option>
+          <option value="10">10名</option>
 
         </select>
 
       </div>
 
 
-
-      <!-- =====================
-           NAME
-      ====================== -->
+      <!-- NAME -->
 
       <div class="field">
 
         <label for="name">
-
           お名前
-
         </label>
-
 
         <input
           type="text"
@@ -756,10 +438,7 @@
       </div>
 
 
-
-      <!-- =====================
-           SEND BUTTON
-      ====================== -->
+      <!-- SEND -->
 
       <button
         id="sendButton"
@@ -771,38 +450,23 @@
       </button>
 
 
-
-      <!-- =====================
-           ERROR
-      ====================== -->
-
       <div
         id="error"
         class="error">
       </div>
 
 
-
-      <!-- =====================
-           NOTICE
-      ====================== -->
-
       <div class="notice">
 
-        ※この時点では
-        予約は確定しておりません。<br>
-
-        店舗からの返信をもって
-        予約確定となります。
+        ※この時点では予約は確定しておりません。<br>
+        店舗からの返信をもって予約確定となります。
 
       </div>
 
 
     </div>
 
-
   </div>
-
 
 
   <!-- =========================
@@ -815,9 +479,7 @@
 
 
     <div class="success-title">
-
       ご予約希望を送信しました
-
     </div>
 
 
@@ -826,11 +488,9 @@
       ありがとうございます。<br><br>
 
       店舗で内容を確認後、<br>
-
       LINEよりご返信いたします。<br><br>
 
       店舗からの返信をもって<br>
-
       ご予約確定となります。
 
     </div>
@@ -842,7 +502,6 @@
 </div>
 
 
-
 <script>
 
 
@@ -850,103 +509,71 @@
      LIFF
   ========================== */
 
-
   const LIFF_ID =
     '2011685472-ftHOwEec';
 
 
-
   async function initializeLiff() {
-
 
     try {
 
-
       await liff.init({
-
-        liffId:
-          LIFF_ID
-
+        liffId: LIFF_ID
       });
-
 
     } catch (error) {
 
-
       console.error(
-
         'LIFF initialization failed',
-
         error
-
       );
-
 
     }
 
-
   }
-
 
 
   /* =========================
      DATE MIN
   ========================== */
 
-
   const dateInput =
-    document.getElementById(
-      'date'
-    );
-
+    document.getElementById('date');
 
 
   const today =
     new Date();
 
 
-
   const yyyy =
     today.getFullYear();
-
 
 
   const mm =
     String(
       today.getMonth() + 1
-    ).padStart(
-      2,
-      '0'
-    );
-
+    ).padStart(2, '0');
 
 
   const dd =
     String(
       today.getDate()
-    ).padStart(
-      2,
-      '0'
-    );
-
+    ).padStart(2, '0');
 
 
   dateInput.min =
     `${yyyy}-${mm}-${dd}`;
 
 
-
   /* =========================
      NTH MONDAY
   ========================== */
-
 
   function nthMonday(
     year,
     month,
     nth
   ) {
-
 
     const firstDay =
       new Date(
@@ -956,13 +583,9 @@
       ).getDay();
 
 
-
     const firstMonday =
       1 +
-      (
-        (8 - firstDay) % 7
-      );
-
+      ((8 - firstDay) % 7);
 
 
     return (
@@ -970,20 +593,14 @@
       (nth - 1) * 7
     );
 
-
   }
-
 
 
   /* =========================
      VERNAL EQUINOX
   ========================== */
 
-
-  function vernalEquinox(
-    year
-  ) {
-
+  function vernalEquinox(year) {
 
     return Math.floor(
 
@@ -998,20 +615,14 @@
 
     );
 
-
   }
-
 
 
   /* =========================
      AUTUMN EQUINOX
   ========================== */
 
-
-  function autumnEquinox(
-    year
-  ) {
-
+  function autumnEquinox(year) {
 
     return Math.floor(
 
@@ -1026,60 +637,44 @@
 
     );
 
-
   }
 
 
-
   /* =========================
-     BASE JAPANESE HOLIDAY
+     BASE HOLIDAY
   ========================== */
 
-
-  function isBaseHoliday(
-    date
-  ) {
-
+  function isBaseHoliday(date) {
 
     const year =
       date.getFullYear();
 
-
     const month =
       date.getMonth() + 1;
-
 
     const day =
       date.getDate();
 
 
-
     const fixedHolidays = [
-
 
       [1, 1],
 
       [2, 11],
-
       [2, 23],
 
       [4, 29],
 
       [5, 3],
-
       [5, 4],
-
       [5, 5],
 
       [8, 11],
 
       [11, 3],
-
       [11, 23]
 
-
     ];
-
 
 
     if (
@@ -1089,26 +684,18 @@
         holiday =>
 
           holiday[0] === month &&
-
           holiday[1] === day
 
       )
 
     ) {
 
-
       return true;
-
 
     }
 
 
-
-    /*
-      成人の日
-      1月第2月曜
-    */
-
+    /* 成人の日 */
 
     if (
 
@@ -1123,19 +710,12 @@
 
     ) {
 
-
       return true;
-
 
     }
 
 
-
-    /*
-      海の日
-      7月第3月曜
-    */
-
+    /* 海の日 */
 
     if (
 
@@ -1150,19 +730,12 @@
 
     ) {
 
-
       return true;
-
 
     }
 
 
-
-    /*
-      敬老の日
-      9月第3月曜
-    */
-
+    /* 敬老の日 */
 
     if (
 
@@ -1177,19 +750,12 @@
 
     ) {
 
-
       return true;
-
 
     }
 
 
-
-    /*
-      スポーツの日
-      10月第2月曜
-    */
-
+    /* スポーツの日 */
 
     if (
 
@@ -1204,111 +770,70 @@
 
     ) {
 
-
       return true;
-
 
     }
 
 
-
-    /*
-      春分の日
-    */
-
+    /* 春分の日 */
 
     if (
 
       month === 3 &&
 
       day ===
-      vernalEquinox(
-        year
-      )
+      vernalEquinox(year)
 
     ) {
 
-
       return true;
-
 
     }
 
 
-
-    /*
-      秋分の日
-    */
-
+    /* 秋分の日 */
 
     if (
 
       month === 9 &&
 
       day ===
-      autumnEquinox(
-        year
-      )
+      autumnEquinox(year)
 
     ) {
 
-
       return true;
-
 
     }
 
 
-
     return false;
 
-
   }
-
 
 
   /* =========================
      JAPANESE HOLIDAY
   ========================== */
 
-
-  function isJapaneseHoliday(
-    date
-  ) {
-
-
-    /*
-      通常の祝日
-    */
+  function isJapaneseHoliday(date) {
 
 
     if (
-      isBaseHoliday(
-        date
-      )
+      isBaseHoliday(date)
     ) {
 
-
       return true;
-
 
     }
 
 
-
     /*
       振替休日
-
-      日曜日の祝日から
-      次の平日までを確認
     */
 
-
     const check =
-      new Date(
-        date
-      );
-
+      new Date(date);
 
 
     check.setDate(
@@ -1316,169 +841,120 @@
     );
 
 
-
     while (
       check.getDay() !== 0
     ) {
 
-
       if (
-        !isBaseHoliday(
-          check
-        )
+        !isBaseHoliday(check)
       ) {
-
 
         break;
 
-
       }
-
 
 
       check.setDate(
         check.getDate() - 1
       );
 
-
     }
-
 
 
     if (
 
       check.getDay() === 0 &&
 
-      isBaseHoliday(
-        check
-      )
+      isBaseHoliday(check)
 
     ) {
 
-
       return true;
-
 
     }
 
 
-
     /*
       国民の休日
-
-      前日と翌日が
-      祝日の場合
     */
 
-
     const before =
-      new Date(
-        date
-      );
-
+      new Date(date);
 
     before.setDate(
       before.getDate() - 1
     );
 
 
-
     const after =
-      new Date(
-        date
-      );
-
+      new Date(date);
 
     after.setDate(
       after.getDate() + 1
     );
 
 
-
     if (
 
-      isBaseHoliday(
-        before
-      ) &&
+      isBaseHoliday(before) &&
 
-      isBaseHoliday(
-        after
-      )
+      isBaseHoliday(after)
 
     ) {
 
-
       return true;
-
 
     }
 
 
-
     return false;
 
-
   }
-
 
 
   /* =========================
      YEAR END / NEW YEAR
   ========================== */
 
-
   function isYearEndNewYearHoliday(
     date
   ) {
 
-
     const year =
       date.getFullYear();
-
 
     const month =
       date.getMonth() + 1;
 
-
     const day =
       date.getDate();
-
 
 
     /*
       1月1日〜1月6日
     */
 
-
     if (
 
       month === 1 &&
-
       day >= 1 &&
-
       day <= 6
 
     ) {
 
-
       return true;
-
 
     }
 
 
-
     /*
       12月の最終土曜日
-      〜
-      12月31日
+      〜12月31日
     */
-
 
     if (
       month === 12
     ) {
-
 
       const lastSaturday =
         new Date(
@@ -1488,11 +964,9 @@
         );
 
 
-
       while (
         lastSaturday.getDay() !== 6
       ) {
-
 
         lastSaturday.setDate(
 
@@ -1500,9 +974,7 @@
 
         );
 
-
       }
-
 
 
       const selected =
@@ -1513,169 +985,118 @@
         );
 
 
-
       if (
-        selected >=
-        lastSaturday
+        selected >= lastSaturday
       ) {
-
 
         return true;
 
-
       }
-
 
     }
 
 
-
     return false;
 
-
   }
-
 
 
   /* =========================
      CLOSED DAY
   ========================== */
 
-
-  function isClosedDay(
-    date
-  ) {
-
+  function isClosedDay(date) {
 
     const weekday =
       date.getDay();
-
 
 
     /*
       土日
     */
 
-
     if (
 
       weekday === 0 ||
-
       weekday === 6
 
     ) {
 
-
       return true;
 
-
     }
-
 
 
     /*
-      日本の祝日
+      祝日
     */
 
-
     if (
-      isJapaneseHoliday(
-        date
-      )
+      isJapaneseHoliday(date)
     ) {
-
 
       return true;
 
-
     }
-
 
 
     /*
       年末年始
     */
 
-
     if (
-      isYearEndNewYearHoliday(
-        date
-      )
+      isYearEndNewYearHoliday(date)
     ) {
 
-
       return true;
-
 
     }
 
 
-
     return false;
 
-
   }
-
 
 
   /* =========================
      DATE CHANGE
   ========================== */
 
-
   dateInput.addEventListener(
-
     'change',
-
     function () {
 
-
       hideError();
-
 
 
       if (
         !this.value
       ) {
 
-
         return;
-
 
       }
 
 
-
       const parts =
-        this.value.split(
-          '-'
-        );
-
+        this.value.split('-');
 
 
       const selectedDate =
         new Date(
 
-          Number(
-            parts[0]
-          ),
+          Number(parts[0]),
 
-          Number(
-            parts[1]
-          ) - 1,
+          Number(parts[1]) - 1,
 
-          Number(
-            parts[2]
-          )
+          Number(parts[2])
 
         );
-
 
 
       /*
         年末年始
       */
-
 
       if (
         isYearEndNewYearHoliday(
@@ -1683,68 +1104,46 @@
         )
       ) {
 
-
-        this.value =
-          '';
-
-
+        this.value = '';
 
         showError(
-
           '年末年始休業のため、ご予約いただけません。'
-
         );
-
 
         return;
 
-
       }
-
 
 
       /*
         土日
       */
 
-
       const weekday =
         selectedDate.getDay();
-
 
 
       if (
 
         weekday === 0 ||
-
         weekday === 6
 
       ) {
 
-
-        this.value =
-          '';
-
-
+        this.value = '';
 
         showError(
-
           '土曜日・日曜日は定休日のため、ご予約いただけません。'
-
         );
-
 
         return;
 
-
       }
-
 
 
       /*
         祝日
       */
-
 
       if (
         isJapaneseHoliday(
@@ -1752,41 +1151,29 @@
         )
       ) {
 
-
-        this.value =
-          '';
-
-
+        this.value = '';
 
         showError(
-
           '祝日は定休日のため、ご予約いただけません。'
-
         );
-
 
         return;
 
-
       }
-
 
     }
 
   );
 
 
-
   /* =========================
-     SEND RESERVATION
+     SEND
   ========================== */
-
 
   async function sendReservation() {
 
 
     hideError();
-
 
 
     const date =
@@ -1795,12 +1182,10 @@
       ).value;
 
 
-
     const time =
       document.getElementById(
         'time'
       ).value;
-
 
 
     const people =
@@ -1809,81 +1194,57 @@
       ).value;
 
 
-
     const name =
       document.getElementById(
         'name'
       ).value.trim();
 
 
-
     /*
       入力確認
     */
 
-
     if (
 
       !date ||
-
       !time ||
-
       !people ||
-
       !name
 
     ) {
 
-
       showError(
-
         'すべての項目をご入力ください。'
-
       );
 
-
       return;
-
 
     }
 
 
-
     /*
-      日付作成
+      日付
     */
 
-
     const dateParts =
-      date.split(
-        '-'
-      );
-
+      date.split('-');
 
 
     const selectedDate =
       new Date(
 
-        Number(
-          dateParts[0]
-        ),
+        Number(dateParts[0]),
 
-        Number(
-          dateParts[1]
-        ) - 1,
+        Number(dateParts[1]) - 1,
 
-        Number(
-          dateParts[2]
-        )
+        Number(dateParts[2])
 
       );
 
 
-
     /*
-      休業日を再確認
+      休業日再確認
     */
-
 
     if (
       isClosedDay(
@@ -1891,76 +1252,51 @@
       )
     ) {
 
-
       showError(
-
         '選択された日は定休日です。別の日をお選びください。'
-
       );
 
-
       return;
-
 
     }
 
 
-
     /*
-      LINEアプリ内か確認
+      LINE内確認
     */
-
 
     if (
       !liff.isInClient()
     ) {
 
-
       showError(
-
         'LINEアプリから予約フォームを開いてください。'
-
       );
 
-
       return;
-
 
     }
 
 
-
     /*
-      表示用の日付
+      表示日
     */
-
 
     const formattedDate =
 
-      Number(
-        dateParts[0]
-      ) +
-
+      Number(dateParts[0]) +
       '年' +
 
-      Number(
-        dateParts[1]
-      ) +
-
+      Number(dateParts[1]) +
       '月' +
 
-      Number(
-        dateParts[2]
-      ) +
-
+      Number(dateParts[2]) +
       '日';
 
 
-
     /*
-      LINEへ送信する文章
+      送信メッセージ
     */
-
 
     const message =
 
@@ -1974,22 +1310,16 @@
 ※店舗からの返信をもって予約確定となります。`;
 
 
-
     const button =
       document.getElementById(
         'sendButton'
       );
 
 
-
-    button.disabled =
-      true;
-
-
+    button.disabled = true;
 
     button.textContent =
       '送信しています…';
-
 
 
     try {
@@ -1997,25 +1327,12 @@
 
       await liff.sendMessages([
 
-
         {
-
-          type:
-            'text',
-
-          text:
-            message
-
+          type: 'text',
+          text: message
         }
 
-
       ]);
-
-
-
-      /*
-        フォーム非表示
-      */
 
 
       document
@@ -2027,12 +1344,6 @@
         'none';
 
 
-
-      /*
-        完了画面表示
-      */
-
-
       document
         .getElementById(
           'successArea'
@@ -2042,89 +1353,59 @@
         'block';
 
 
-
-      /*
-        上まで戻す
-      */
-
-
       window.scrollTo({
 
-        top:
-          0,
+        top: 0,
 
-        behavior:
-          'smooth'
+        behavior: 'smooth'
 
       });
-
 
 
     } catch (error) {
 
 
-      console.error(
-        error
-      );
+      console.error(error);
 
 
-
-      button.disabled =
-        false;
-
-
+      button.disabled = false;
 
       button.textContent =
         'LINEで予約希望を送信';
 
 
-
       showError(
-
         '送信できませんでした。もう一度お試しください。'
-
       );
-
 
     }
 
-
   }
-
 
 
   /* =========================
      ERROR
   ========================== */
 
-
-  function showError(
-    message
-  ) {
-
+  function showError(message) {
 
     const area =
       document.getElementById(
         'error'
       );
-
 
 
     area.textContent =
       message;
 
 
-
     area.style.display =
       'block';
-
 
   }
 
 
-
   function hideError() {
-
 
     const area =
       document.getElementById(
@@ -2132,31 +1413,23 @@
       );
 
 
-
     area.style.display =
       'none';
-
 
 
     area.textContent =
       '';
 
-
   }
-
 
 
   /* =========================
      START
   ========================== */
 
-
   window.addEventListener(
-
     'load',
-
     initializeLiff
-
   );
 
 
