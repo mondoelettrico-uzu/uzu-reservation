@@ -532,12 +532,75 @@
 <script>
 
 
-  /* =========================
+    /* =========================
      LIFF
   ========================== */
 
+  const LIFF_IDS = {
+    dev: '2011685472-ftHOwEec',
+    review: '2011685473-ITYBYAI6',
+    prod: '2011685474-HAW2JHZi'
+  };
+
+
+  function getLiffEnvironment() {
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    const env =
+      params.get('env');
+
+    if (
+      env === 'dev' ||
+      env === 'review' ||
+      env === 'prod'
+    ) {
+
+      sessionStorage.setItem(
+        'uzuLiffEnv',
+        env
+      );
+
+      return env;
+
+    }
+
+
+    const savedEnv =
+      sessionStorage.getItem(
+        'uzuLiffEnv'
+      );
+
+    if (
+      savedEnv === 'dev' ||
+      savedEnv === 'review' ||
+      savedEnv === 'prod'
+    ) {
+
+      return savedEnv;
+
+    }
+
+
+    /*
+      env指定がない通常アクセスは
+      本番環境として扱う
+    */
+
+    return 'prod';
+
+  }
+
+
+  const LIFF_ENV =
+    getLiffEnvironment();
+
+
   const LIFF_ID =
-    '2011685472-ftHOwEec';
+    LIFF_IDS[LIFF_ENV];
 
 
   async function initializeLiff() {
@@ -555,10 +618,13 @@
         error
       );
 
+      showError(
+        'LINEとの接続に失敗しました。画面を閉じて、もう一度お試しください。'
+      );
+
     }
 
   }
-
 
   /* =========================
      DATE SETTINGS
